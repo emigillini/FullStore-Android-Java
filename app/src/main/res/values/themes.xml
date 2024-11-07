@@ -1,0 +1,42 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.FullStore" parent="Theme.Material3.DayNight">
+        <item name="colorPrimary">@android:color/black</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:fontFamily">@font/atkinson</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="Theme.FullStore" parent="Base.Theme.FullStore" />
+
+    <style name="CustomToolbarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:elevation">8dp</item>
+        <item name="colorOnPrimary">@android:color/holo_orange_dark</item>
+        <item name="android:titleTextAppearance">@style/CustomToolbarText</item>
+        <item name="android:theme">@style/ToolbarIconTheme</item>
+    </style>
+
+    <style name="CustomToolbarText" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/atkinson</item>
+        <item name="android:textColor">@android:color/holo_orange_dark</item>
+    </style>
+
+    <style name="ThemeOverlay.PopupTheme" parent="Theme.AppCompat.DayNight">
+        <item name="android:colorBackground">@color/whitesmoke</item>
+        <item name="android:elevation">15dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/atkinson</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="ToolbarIconTheme" parent="Theme.AppCompat.DayNight">
+        <item name="colorControlNormal">@android:color/black</item>
+    </style>
+
+    <style name="Theme.FullStore.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.FullStore.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

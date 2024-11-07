@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="@string/full_store">
+        <menu>
+            <item
+                android:id="@+id/nav_home"
+                android:icon="@drawable/house_solid"
+                android:title="@string/icon_home" />
+
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/usericon"
+                android:title="@string/user_dashboard" />
+        </menu>
+    </item>
+
+    <item android:title="@string/products">
+        <menu>
+            <item
+                android:id="@+id/homelist"
+                android:icon="@drawable/sneaker"
+                android:title="@string/all_products" />
+            <item
+                android:id="@+id/adidas"
+                android:icon="@drawable/adidas"
+                android:title="@string/adidas" />
+            <item
+                android:id="@+id/puma"
+                android:icon="@drawable/puma"
+                android:title="@string/puma" />
+            <item
+                android:id="@+id/nike"
+                android:icon="@drawable/nike"
+                android:title="@string/nike" />
+        </menu>
+    </item>
+
+
+    <item android:title="@string/cart">
+        <menu>
+            <item
+                android:id="@+id/cartm"
+                android:icon="@drawable/cart"
+                android:title="@string/icon_cart" />
+        </menu>
+    </item>
+
+</menu>

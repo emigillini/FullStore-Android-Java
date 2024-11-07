@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_carts"
+        android:icon="@drawable/cart_shopping_solid"
+        android:title="@string/nav_cart" />
+    <item
+        android:id="@+id/nav_homes"
+        android:icon="@drawable/house_solid"
+        android:title="@string/Nav_home" />
+    <item
+        android:id="@+id/nav_back"
+        android:icon="@drawable/arrow_left_solid"
+        android:title="@string/nav_return" />
+</menu>

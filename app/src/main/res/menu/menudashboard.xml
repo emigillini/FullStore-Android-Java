@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/sneaker"
+        android:title="@string/icon_home" />
+    <item
+        android:id="@+id/conversation"
+
+        android:icon="@drawable/sneaker"
+        android:title="@string/conversations"
+        android:titleTextColor="@android:color/holo_orange_dark" />
+    <item
+        android:id="@+id/userInfo"
+
+        android:icon="@drawable/sneaker"
+        android:title="@string/user_info" />
+
+    <item
+        android:id="@+id/purchases"
+        android:icon="@drawable/sneaker"
+        android:title="@string/purchases" />
+
+    <item
+        android:id="@+id/cartd"
+        android:icon="@drawable/cart"
+        android:title="@string/icon_cart"
+        app:showAsAction="ifRoom" />
+</menu>
