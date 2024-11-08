@@ -36,8 +36,8 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.Purcha
         SimplePurchase simplePurchase = purchaseList.get(position);
         holder.totalTextView.setText("Total: $" + simplePurchase.getTotal());
         holder.invoiceTextView.setText("Invoice: " + simplePurchase.getInvoice_number());
-        holder.dateTextView.setText("Date: " + simplePurchase.getDate());
-        holder.userTextView.setText("User: " + simplePurchase.getDelivery().getDelivery_status()); // Ajustar formato si es necesario
+        holder.dateTextView.setText("Date: " + simplePurchase.getFormattedDate());
+        holder.userTextView.setText("Delivery Status: " + simplePurchase.getDelivery().getDelivery_status());
     }
 
     @Override

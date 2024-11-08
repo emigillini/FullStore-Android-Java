@@ -252,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
             MenuItem iconItem = menu.findItem(id);
             if (iconItem != null) {
                 if (hasProductsInCart) {
-                    Drawable cartIcon = context.getResources().getDrawable(R.drawable.cart_shopping_solid, null);
+                    Drawable cartIcon = context.getResources().getDrawable(R.drawable.cart_solid, null);
                     if (cartIcon != null) {
                         cartIcon.setTint(context.getResources().getColor(R.color.red, null));
                         iconItem.setIcon(cartIcon);
