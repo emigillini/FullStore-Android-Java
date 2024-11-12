@@ -105,6 +105,7 @@
     <string name="user_example_com">user@example.com</string>
     <string name="example_message">Example Message</string>
     <string name="user_dashboard">User Dashboard</string>
+    <string name="fullstore">FullStore</string>
 
 
 </resources>

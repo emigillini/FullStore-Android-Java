@@ -22,15 +22,15 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/icon_background" />
+            android:background="@drawable/btn_background"  />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/app_icon"
             android:scaleType="centerCrop"
-            android:src="@drawable/sneaker"
-            app:tint="@android:color/black" />
+            android:src="@drawable/shoe_new"
+            />
     </FrameLayout>
 
     <TextView
