@@ -1,12 +1,9 @@
 package com.example.fullstore.Activities;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
-
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,15 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.fullstore.R;
 import com.example.fullstore.utils.ValidationUtils;
 
 
 public class RecoverFragment extends BaseFragment {
     private EditText etEmail;
-    private TextView tvLogin;
-    private Button btnRequestReset;
 
     public RecoverFragment() {
 
@@ -48,8 +42,8 @@ public class RecoverFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         showToolbar(false);
         etEmail = view.findViewById(R.id.et_email);
-        tvLogin = view.findViewById(R.id.login_re);
-        btnRequestReset = view.findViewById(R.id.btn_request_reset);
+        TextView tvLogin = view.findViewById(R.id.login_re);
+        Button btnRequestReset = view.findViewById(R.id.btn_request_reset);
 
         userViewModel.getPasswordResponseLiveData().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

@@ -2,16 +2,14 @@ package com.example.fullstore.viewmodels;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.example.fullstore.Data.SessionManager;
 import com.example.fullstore.models.Product;
 import com.example.fullstore.repository.ProductRepository;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,7 +45,7 @@ public class ProductViewModel extends ViewModel {
     public void fetchAllProducts() {
         productRepository.getAllProducts().enqueue(new Callback<List<Product>>() {
             @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+            public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
                 if (response.isSuccessful()) {
                     List<Product> productList = response.body();
 
@@ -61,7 +59,7 @@ public class ProductViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Product>> call, @NonNull Throwable t) {
                 errorLiveData.postValue(t.getMessage());
             }
         });
@@ -71,7 +69,7 @@ public class ProductViewModel extends ViewModel {
 
         productRepository.getProductById(id).enqueue(new Callback<Product>() {
             @Override
-            public void onResponse(Call<Product> call, Response<Product> response) {
+            public void onResponse(@NonNull Call<Product> call, @NonNull Response<Product> response) {
                 if (response.isSuccessful()) {
                     productLiveData.postValue(response.body());
                 } else {
@@ -80,7 +78,7 @@ public class ProductViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<Product> call, Throwable t) {
+            public void onFailure(@NonNull Call<Product> call, @NonNull Throwable t) {
                 errorLiveData.postValue(t.getMessage());
             }
         });
@@ -89,7 +87,7 @@ public class ProductViewModel extends ViewModel {
     public void fetchProductsByBrand(String brandName) {
         productRepository.getProductsByBrand(brandName).enqueue(new Callback<List<Product>>() {
             @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+            public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
                 if (response.isSuccessful()) {
                     productListLiveData.postValue(response.body());
                 } else {
@@ -98,7 +96,7 @@ public class ProductViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Product>> call, @NonNull Throwable t) {
                 errorLiveData.postValue(t.getMessage());
             }
         });

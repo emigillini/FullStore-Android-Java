@@ -3,17 +3,16 @@ package com.example.fullstore.viewmodels;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.example.fullstore.Data.SessionManager;
 import com.example.fullstore.models.AddProductResponse;
 import com.example.fullstore.models.Cart;
 import com.example.fullstore.models.CartProduct;
 import com.example.fullstore.models.RemoveProductResponse;
 import com.example.fullstore.repository.CartRepository;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,9 +48,9 @@ public class CartViewModel extends ViewModel {
 
         cartRepository.getCart().enqueue(new Callback<Cart>() {
             @Override
-            public void onResponse(Call<Cart> call, Response<Cart> response) {
+            public void onResponse(@NonNull Call<Cart> call, @NonNull Response<Cart> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Log.i("MENSAJE", "onResponse: " + response.body().toString());
+                    Log.i("MENSAJE", "onResponse: " + response.body());
                     cartLiveData.setValue(response.body());
                 } else {
                     errorLiveData.setValue("Error al obtener el carrito");
@@ -59,7 +58,7 @@ public class CartViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<Cart> call, Throwable t) {
+            public void onFailure(@NonNull Call<Cart> call, @NonNull Throwable t) {
                 errorLiveData.setValue("Error de red" + t);
             }
         });
@@ -73,8 +72,9 @@ public class CartViewModel extends ViewModel {
 
         cartRepository.addProductToCart(productId, quantity).enqueue(new Callback<AddProductResponse>() {
             @Override
-            public void onResponse(Call<AddProductResponse> call, Response<AddProductResponse> response) {
+            public void onResponse(@NonNull Call<AddProductResponse> call, @NonNull Response<AddProductResponse> response) {
                 if (response.isSuccessful()) {
+                    assert response.body() != null;
                     cartLiveData.setValue(response.body().getCart());
                 } else {
                     errorLiveData.setValue("Error adding product");
@@ -82,7 +82,7 @@ public class CartViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<AddProductResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<AddProductResponse> call, @NonNull Throwable t) {
                 errorLiveData.setValue("Network error");
             }
         });
@@ -96,8 +96,9 @@ public class CartViewModel extends ViewModel {
 
         cartRepository.removeProductFromCart(productId, quantity).enqueue(new Callback<RemoveProductResponse>() {
             @Override
-            public void onResponse(Call<RemoveProductResponse> call, Response<RemoveProductResponse> response) {
+            public void onResponse(@NonNull Call<RemoveProductResponse> call, @NonNull Response<RemoveProductResponse> response) {
                 if (response.isSuccessful()) {
+                    assert response.body() != null;
                     cartLiveData.setValue(response.body().getCart()); // Fetch updated cart
                 } else {
                     errorLiveData.setValue("Error removing product");
@@ -105,7 +106,7 @@ public class CartViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<RemoveProductResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<RemoveProductResponse> call, @NonNull Throwable t) {
                 errorLiveData.setValue("Network error");
             }
         });
@@ -132,7 +133,7 @@ public class CartViewModel extends ViewModel {
 
         cartRepository.createCart().enqueue(new Callback<Cart>() {
             @Override
-            public void onResponse(Call<Cart> call, Response<Cart> response) {
+            public void onResponse(@NonNull Call<Cart> call, @NonNull Response<Cart> response) {
                 if (response.isSuccessful()) {
                     cartLiveData.postValue(response.body());
                 } else {
@@ -141,7 +142,7 @@ public class CartViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<Cart> call, Throwable t) {
+            public void onFailure(@NonNull Call<Cart> call, @NonNull Throwable t) {
                 errorLiveData.postValue("Error in cart communication");
             }
         });

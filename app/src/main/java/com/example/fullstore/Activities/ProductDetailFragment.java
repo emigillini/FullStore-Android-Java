@@ -1,11 +1,9 @@
 package com.example.fullstore.Activities;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,7 +14,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.example.fullstore.R;
 import com.example.fullstore.models.Product;
@@ -26,7 +23,6 @@ public class ProductDetailFragment extends BaseFragment {
     private TextView productName, productDescription, productPrice;
     private ImageView productImage;
     private String productId;
-    private Button add, remove;
 
     public ProductDetailFragment() {
 
@@ -57,8 +53,8 @@ public class ProductDetailFragment extends BaseFragment {
         productDescription = view.findViewById(R.id.tvProductDescription);
         productPrice = view.findViewById(R.id.tvProductPrice);
         productImage = view.findViewById(R.id.ivProductImage);
-        add = view.findViewById(R.id.add_b);
-        remove = view.findViewById(R.id.remove_b);
+        Button add = view.findViewById(R.id.add_b);
+        Button remove = view.findViewById(R.id.remove_b);
         cartViewModel.fetchCart();
 
         add.setOnClickListener(new View.OnClickListener() {

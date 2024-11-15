@@ -19,6 +19,7 @@
         android:id="@+id/logoAnim"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:contentDescription="@string/bike_image_description"
         android:src="@drawable/shoe_new"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

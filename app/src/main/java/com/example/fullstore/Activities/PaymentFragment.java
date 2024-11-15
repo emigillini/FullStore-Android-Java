@@ -1,13 +1,12 @@
 package com.example.fullstore.Activities;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,7 +18,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.fullstore.Adapter.CartAdapter;
 import com.example.fullstore.R;
 import com.example.fullstore.models.Cart;
@@ -27,12 +25,10 @@ import com.example.fullstore.models.PaymentType;
 import com.example.fullstore.models.PurchaseConfirmResponse;
 import com.example.fullstore.api.StripeService;
 import com.stripe.android.view.CardInputWidget;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentFragment extends BaseFragment {
-    private RecyclerView rvPurchaseItems;
     private CartAdapter cartAdapter;
     private TextView tvTotalPurchase;
     private Button confirmPurchaseButton;
@@ -62,7 +58,7 @@ public class PaymentFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         showToolbar(true);
         cartViewModel.fetchCart();
-        rvPurchaseItems = view.findViewById(R.id.recyclerViewPurchaseItems);
+        RecyclerView rvPurchaseItems = view.findViewById(R.id.recyclerViewPurchaseItems);
         tvTotalPurchase = view.findViewById(R.id.totalPurchaseAmount);
         confirmPurchaseButton = view.findViewById(R.id.confirmPurchaseButton);
         radioGroupPaymentMethods = view.findViewById(R.id.radioGroupPaymentMethods);
@@ -70,7 +66,18 @@ public class PaymentFragment extends BaseFragment {
         example = view.findViewById(R.id.exampleDataLayout);
         example.setVisibility(View.GONE);
         cardInputWidget.setVisibility(View.GONE);
-        rvPurchaseItems.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        int orientation = getResources().getConfiguration().orientation;
+
+
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            rvPurchaseItems.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        } else {
+            rvPurchaseItems.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        }
+
+
+
         cartAdapter = new CartAdapter(new ArrayList<>(), getContext(), null, false);
         rvPurchaseItems.setAdapter(cartAdapter);
 

@@ -2,15 +2,14 @@ package com.example.fullstore.viewmodels;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.example.fullstore.Data.SessionManager;
 import com.example.fullstore.models.UpdateUserRequest;
 import com.example.fullstore.models.User;
 import com.example.fullstore.repository.DashBoardRepository;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,7 +53,7 @@ public class DashBoardViewModel extends ViewModel {
         }
         dashboardRepository.getUser().enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     userLiveData.setValue(response.body());
                 } else {
@@ -63,7 +62,7 @@ public class DashBoardViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 errorLiveData.setValue("Connection failed: " + t.getMessage());
             }
         });
@@ -75,7 +74,7 @@ public class DashBoardViewModel extends ViewModel {
         }
         dashboardRepository.updateUser(updateUserRequest).enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if (response.isSuccessful()) {
                     userLiveData.setValue(response.body());
                     updateSuccess.setValue(true);
@@ -86,7 +85,7 @@ public class DashBoardViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 errorLiveData.setValue("Connection failed: " + t.getMessage());
                 updateSuccess.setValue(false);
             }

@@ -1,11 +1,9 @@
 package com.example.fullstore.Activities;
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +11,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.FragmentManager;
-
 import com.example.fullstore.Data.SessionManager;
 import com.example.fullstore.R;
 import com.example.fullstore.viewmodels.CartViewModel;
@@ -25,6 +22,8 @@ import com.example.fullstore.viewmodels.UserViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.Objects;
 
 public abstract class BaseFragment extends Fragment implements MenuProvider {
 
@@ -91,7 +90,7 @@ public abstract class BaseFragment extends Fragment implements MenuProvider {
         BottomNavigationView bottomNavigationView = mainActivity.getBottomNavigationView();
 
         navigationView.setNavigationItemSelectedListener(item -> {
-            String brandName = item.getTitle().toString();
+            String brandName = Objects.requireNonNull(item.getTitle()).toString();
             if (brandName.equals("Adidas") || brandName.equals("Puma") || brandName.equals("Nike")) {
                 navigateToProductFragmentWithBrand(brandName);
             } else {
@@ -107,6 +106,21 @@ public abstract class BaseFragment extends Fragment implements MenuProvider {
                 return false;
             }
         });
+    }
+
+
+    public void setBottomNavigationVisibility(boolean isVisible) {
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) {
+            BottomNavigationView bottomNavigationView = mainActivity.getBottomNavigationView();
+            if (bottomNavigationView != null) {
+                if (isVisible) {
+                    bottomNavigationView.setVisibility(View.VISIBLE);
+                } else {
+                    bottomNavigationView.setVisibility(View.GONE);
+                }
+            }
+        }
     }
 
     private void navigateToProductFragmentWithBrand(String brandName) {

@@ -6,24 +6,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.fullstore.R;
-
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.example.fullstore.models.PurchaseConfirmResponse;
 
 public class ResumeFragment extends BaseFragment {
-
-    private TextView purchaseIdTextView;
-    private TextView purchaseDateTextView;
-    private TextView totalAmountTextView;
-    private TextView purchasedItemsTextView;
-    private Button button;
 
     public ResumeFragment() {
 
@@ -46,12 +36,12 @@ public class ResumeFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         showToolbar(true);
-        purchaseIdTextView = view.findViewById(R.id.purchaseIdTextView);
-        purchaseDateTextView = view.findViewById(R.id.purchaseDateTextView);
-        totalAmountTextView = view.findViewById(R.id.totalAmountTextView);
-        purchasedItemsTextView = view.findViewById(R.id.purchasedItemsTextView);
+        TextView purchaseIdTextView = view.findViewById(R.id.purchaseIdTextView);
+        TextView purchaseDateTextView = view.findViewById(R.id.purchaseDateTextView);
+        TextView totalAmountTextView = view.findViewById(R.id.totalAmountTextView);
+        TextView purchasedItemsTextView = view.findViewById(R.id.purchasedItemsTextView);
         cartViewModel.fetchCart();
-        button = view.findViewById(R.id.purchases_pu);
+        Button button = view.findViewById(R.id.purchases_pu);
         PurchaseConfirmResponse lastPurchase = sessionManager.getLastPurchase();
 
         if (lastPurchase != null) {

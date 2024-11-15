@@ -8,24 +8,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.fullstore.Adapter.PurchaseAdapter;
 import com.example.fullstore.R;
 import com.example.fullstore.models.SimplePurchase;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class AllResumeFragment extends BaseFragment {
 
-    private RecyclerView purchaseRecyclerView;
     private PurchaseAdapter purchaseAdapter;
     private ArrayList<SimplePurchase> purchaseArrayList = new ArrayList<>();
 
@@ -49,7 +44,7 @@ public class AllResumeFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         showToolbar(true);
-        purchaseRecyclerView = view.findViewById(R.id.purchase_recycler_view);
+        RecyclerView purchaseRecyclerView = view.findViewById(R.id.purchase_recycler_view);
         purchaseRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         purchaseAdapter = new PurchaseAdapter(this.purchaseArrayList, getContext()); // Inicializa el adaptador vacío
         purchaseRecyclerView.setAdapter(purchaseAdapter);

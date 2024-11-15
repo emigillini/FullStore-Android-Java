@@ -2,13 +2,10 @@ package com.example.fullstore.Activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,13 +14,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.fullstore.R;
 
 
 public class LogoutFragment extends BaseFragment {
-    private TextView textView;
-    private Button btnLogout;
 
     public LogoutFragment() {
 
@@ -46,9 +40,9 @@ public class LogoutFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         showToolbar(true);
-        textView = view.findViewById(R.id.tvframent2);
-        btnLogout = view.findViewById(R.id.confirm_logout);
-        textView.setText(("Logout"));
+        TextView textView = view.findViewById(R.id.tvframent2);
+        Button btnLogout = view.findViewById(R.id.confirm_logout);
+        textView.setText(R.string.logout);
 
         userViewModel.getLogoutLiveData().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override

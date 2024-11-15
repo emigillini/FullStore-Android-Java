@@ -2,21 +2,19 @@ package com.example.fullstore.viewmodels;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.example.fullstore.Data.SessionManager;
 import com.example.fullstore.models.AddConversationRequest;
 import com.example.fullstore.models.AddMessageRequest;
 import com.example.fullstore.models.Conversations;
 import com.example.fullstore.models.Message;
 import com.example.fullstore.repository.MessagingRepository;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -58,7 +56,7 @@ public class MessagingViewModel extends ViewModel {
         }
         messagingRepository.getUserConversations().enqueue(new Callback<List<Conversations>>() {
             @Override
-            public void onResponse(Call<List<Conversations>> call, Response<List<Conversations>> response) {
+            public void onResponse(@NonNull Call<List<Conversations>> call, @NonNull Response<List<Conversations>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Conversations> conversationsList = response.body();
 
@@ -71,7 +69,7 @@ public class MessagingViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<List<Conversations>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Conversations>> call, @NonNull Throwable t) {
                 errorLiveData.setValue(t.getMessage());
             }
         });
@@ -84,7 +82,7 @@ public class MessagingViewModel extends ViewModel {
         }
         messagingRepository.getMessagesByConversationId(conversationId).enqueue(new Callback<List<Message>>() {
             @Override
-            public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+            public void onResponse(@NonNull Call<List<Message>> call, @NonNull Response<List<Message>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     messages.setValue(response.body());
 
@@ -94,7 +92,7 @@ public class MessagingViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<List<Message>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Message>> call, @NonNull Throwable t) {
                 errorLiveData.setValue(t.getMessage());
             }
         });
@@ -106,7 +104,7 @@ public class MessagingViewModel extends ViewModel {
         }
         messagingRepository.sendMessage(addMessageRequest).enqueue(new Callback<Message>() {
             @Override
-            public void onResponse(Call<Message> call, Response<Message> response) {
+            public void onResponse(@NonNull Call<Message> call, @NonNull Response<Message> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Message> currentMessages = messages.getValue();
 
@@ -114,6 +112,7 @@ public class MessagingViewModel extends ViewModel {
 
                         currentMessages.add(response.body());
                         messages.setValue(currentMessages);
+
                     } else {
                         errorLiveData.postValue("Error sending messagge");
                     }
@@ -121,7 +120,7 @@ public class MessagingViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<Message> call, Throwable t) {
+            public void onFailure(@NonNull Call<Message> call, @NonNull Throwable t) {
                 errorLiveData.setValue(t.getMessage());
             }
         });
@@ -133,7 +132,7 @@ public class MessagingViewModel extends ViewModel {
         }
         messagingRepository.createConversation(addConversationRequest).enqueue(new Callback<Conversations>() {
             @Override
-            public void onResponse(Call<Conversations> call, Response<Conversations> response) {
+            public void onResponse(@NonNull Call<Conversations> call, @NonNull Response<Conversations> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Conversations newConversation = response.body();
 
@@ -153,7 +152,7 @@ public class MessagingViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<Conversations> call, Throwable t) {
+            public void onFailure(@NonNull Call<Conversations> call, @NonNull Throwable t) {
                 errorLiveData.setValue(t.getMessage());
             }
         });
@@ -161,7 +160,7 @@ public class MessagingViewModel extends ViewModel {
 
     private boolean isSessionExpired() {
         if (sessionManager.isTokenExpired()) {
-            errorLiveData.setValue("Sesión expirada");
+            errorLiveData.setValue("Session expired");
             sessionExpiredLiveData.setValue(true);
             return true;
         }

@@ -1,29 +1,24 @@
 package com.example.fullstore.Activities;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.example.fullstore.Adapter.ConversationsAdapter;
 import com.example.fullstore.R;
 import com.example.fullstore.models.AddConversationRequest;
 import com.example.fullstore.models.Conversations;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -31,8 +26,6 @@ public class ConversationsFragment extends BaseFragment implements Conversations
 
     private ConversationsAdapter conversationsAdapter;
     private EditText conversationNameEditText;
-    private RecyclerView recyclerView;
-    private Button newConversationButton;
     private ArrayList<Conversations> listConversations = new ArrayList<>();
 
     public ConversationsFragment() {
@@ -55,12 +48,19 @@ public class ConversationsFragment extends BaseFragment implements Conversations
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         showToolbar(true);
-        recyclerView = view.findViewById(R.id.recycler_view_conversations);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_conversations);
+        if (getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        } else {
+
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        }
+
         conversationsAdapter = new ConversationsAdapter(this.listConversations, this);
         recyclerView.setAdapter(conversationsAdapter);
         conversationNameEditText = view.findViewById(R.id.et_conversation_name);
-        newConversationButton = view.findViewById(R.id.btn_new_conversation);
+        Button newConversationButton = view.findViewById(R.id.btn_new_conversation);
 
         newConversationButton.setOnClickListener(new View.OnClickListener() {
             @Override

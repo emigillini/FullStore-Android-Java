@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation (libs.gridlayout)
     implementation (libs.cardview)
     annotationProcessor(libs.glide.compiler)
     testImplementation(libs.junit)

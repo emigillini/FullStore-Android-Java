@@ -5,15 +5,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
-
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.example.fullstore.R;
 import com.example.fullstore.utils.ValidationUtils;
 
@@ -24,8 +21,6 @@ public class RegisterFragment extends BaseFragment {
     private EditText etPassword;
     private EditText etAddress;
     private EditText etIdNumber;
-    private Button btnRegister;
-    private TextView login_r, recover_r;
 
     public RegisterFragment() {
 
@@ -47,11 +42,11 @@ public class RegisterFragment extends BaseFragment {
         etEmail = view.findViewById(R.id.et_email);
         etPassword = view.findViewById(R.id.et_password);
         etAddress = view.findViewById(R.id.et_address);
-        btnRegister = view.findViewById(R.id.btn_register);
+        Button btnRegister = view.findViewById(R.id.btn_register);
         etIdNumber = view.findViewById(R.id.editTextIdentificationNumber);
-        login_r = view.findViewById(R.id.login_r);
-        recover_r = view.findViewById(R.id.recover_r);
-
+        TextView login_r = view.findViewById(R.id.login_r);
+        TextView recover_r = view.findViewById(R.id.recover_r);
+        setBottomNavigationVisibility(false);
         userViewModel.getRegistrationSuccessLiveData().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean registered) {

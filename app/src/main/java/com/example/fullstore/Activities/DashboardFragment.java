@@ -1,22 +1,17 @@
 package com.example.fullstore.Activities;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-
 import com.example.fullstore.R;
 import com.example.fullstore.Views.DashboardView;
 import com.example.fullstore.models.DashboardCard;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,10 +41,7 @@ public class DashboardFragment extends BaseFragment {
         showToolbar(true);
         DashboardView dashboardView = view.findViewById(R.id.dashboardView);
         FragmentActivity activity = requireActivity();
-
-        if (activity != null) {
-            dashboardView.setFragmentActivity(activity);
-        }
+        dashboardView.setFragmentActivity(activity);
         List<DashboardCard> dashboardCards = crearTarjetasDashboard();
         dashboardView.setDashboardCards(dashboardCards);
 

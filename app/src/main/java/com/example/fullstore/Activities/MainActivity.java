@@ -4,13 +4,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,10 +21,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.fullstore.Data.SessionManager;
 import com.example.fullstore.R;
-import com.example.fullstore.Views.DashboardView;
 import com.example.fullstore.viewmodels.CartViewModel;
 import com.example.fullstore.viewmodels.DashBoardViewModel;
 import com.example.fullstore.viewmodels.MessagingViewModel;
@@ -37,7 +35,6 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
     private NavigationView navigationView;
     private BottomNavigationView bottomNavigationView;
     private CartViewModel cartViewModel;
@@ -121,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
         observeSessionExpiration();
         navigationView = findViewById(R.id.navigation_view);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setVisibility(View.GONE);
-        toolbar = findViewById(R.id.toolbar1);
+        loadNavigationMenu();
+        Toolbar toolbar = findViewById(R.id.toolbar1);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0);
@@ -261,6 +258,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+        }
+    }
+
+    private void loadNavigationMenu() {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            bottomNavigationView.setVisibility(View.GONE);
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.menunav_land );
+        } else {
+            bottomNavigationView.setVisibility(View.VISIBLE);
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.menunav);
         }
     }
 

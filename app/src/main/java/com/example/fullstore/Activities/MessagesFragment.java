@@ -3,29 +3,25 @@ package com.example.fullstore.Activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Button;
 import android.widget.ImageButton;
-
 import com.example.fullstore.Adapter.MessagesAdapter;
 import com.example.fullstore.R;
 import com.example.fullstore.models.AddMessageRequest;
 import com.example.fullstore.models.Message;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MessagesFragment extends BaseFragment {
 
@@ -34,7 +30,6 @@ public class MessagesFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private ArrayList<Message> listaMessage = new ArrayList<>();
     private EditText messageInput;
-    private ImageButton sendButton;
 
     public MessagesFragment() {
 
@@ -64,7 +59,7 @@ public class MessagesFragment extends BaseFragment {
         messagesAdapter = new MessagesAdapter(this.listaMessage);
         recyclerView.setAdapter(messagesAdapter);
         messageInput = view.findViewById(R.id.message_input);
-        sendButton = view.findViewById(R.id.send_button);
+        ImageButton sendButton = view.findViewById(R.id.send_button);
         messagingViewModel.loadMessagesByConversationId(conversationId);
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +69,8 @@ public class MessagesFragment extends BaseFragment {
                     AddMessageRequest message = new AddMessageRequest(conversationId, content);
                     messagingViewModel.sendMessage(message);
                     messageInput.setText("");
+                    int lastPosition = Objects.requireNonNull(recyclerView.getAdapter()).getItemCount() - 1;
+                    recyclerView.scrollToPosition(lastPosition);
                 }
 
             }
@@ -83,7 +80,7 @@ public class MessagesFragment extends BaseFragment {
             @Override
             public void onChanged(Boolean isSessionExpired) {
                 if (isSessionExpired != null && isSessionExpired) {
-                    // Mostrar la alerta de sesión expirada
+
                     new AlertDialog.Builder(getContext())
                             .setTitle("Session Expired")
                             .setMessage("Your session has expired. Please log in again.")
@@ -104,6 +101,9 @@ public class MessagesFragment extends BaseFragment {
             @Override
             public void onChanged(List<Message> messages) {
                 messagesAdapter.setMessages(messages);
+                if (messages != null && !messages.isEmpty()) {
+                    recyclerView.scrollToPosition(messages.size() - 1);
+                }
             }
         });
     }

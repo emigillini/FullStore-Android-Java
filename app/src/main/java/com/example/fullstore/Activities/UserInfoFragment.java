@@ -1,11 +1,8 @@
 package com.example.fullstore.Activities;
 
-
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.fullstore.R;
 import com.example.fullstore.models.UpdateUserRequest;
 
@@ -22,7 +18,6 @@ import com.example.fullstore.models.UpdateUserRequest;
 public class UserInfoFragment extends BaseFragment {
 
     private EditText editTextIdentificationNumber, editTextPhone, editTextAddress;
-    private Button buttonUpdate;
 
     public UserInfoFragment() {
 
@@ -49,7 +44,7 @@ public class UserInfoFragment extends BaseFragment {
         editTextIdentificationNumber = view.findViewById(R.id.editTextIdentificationNumber);
         editTextPhone = view.findViewById(R.id.editTextPhone);
         editTextAddress = view.findViewById(R.id.editTextAddress);
-        buttonUpdate = view.findViewById(R.id.buttonUpdate);
+        Button buttonUpdate = view.findViewById(R.id.buttonUpdate);
 
         dashBoardViewModel.getUserLiveData().observe(getViewLifecycleOwner(), user -> {
             if (user != null) {

@@ -1,13 +1,12 @@
 package com.example.fullstore.Activities;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,12 +17,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.fullstore.Adapter.CartAdapter;
 import com.example.fullstore.R;
 import com.example.fullstore.models.Cart;
 import com.example.fullstore.models.CartProduct;
-
 import java.util.ArrayList;
 
 public class CartFragment extends BaseFragment implements CartAdapter.OnProductCartClickListener {
@@ -59,7 +56,12 @@ public class CartFragment extends BaseFragment implements CartAdapter.OnProductC
         rvCartItems = view.findViewById(R.id.recyclerViewCart);
         tvTotalPrice = view.findViewById(R.id.totalPriceTextView);
         cartViewModel.fetchCart();
-        rvCartItems.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        int spanCount = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) ? 2 : 1;
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), spanCount);
+        rvCartItems.setLayoutManager(gridLayoutManager);
+
+
         cartAdapter = new CartAdapter(this.arrayList, getContext(), this, true);
         rvCartItems.setAdapter(cartAdapter);
 

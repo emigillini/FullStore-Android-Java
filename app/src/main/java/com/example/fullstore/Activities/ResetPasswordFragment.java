@@ -10,11 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
-
 import com.example.fullstore.R;
 import com.example.fullstore.models.NewPasswordRequest;
 
@@ -22,7 +20,6 @@ import com.example.fullstore.models.NewPasswordRequest;
 public class ResetPasswordFragment extends BaseFragment {
     private EditText etNewPassword;
     private EditText etConfirmPassword;
-    private Button btnResetPassword;
     private String uid;
     private String token;
 
@@ -55,7 +52,7 @@ public class ResetPasswordFragment extends BaseFragment {
         showToolbar(true);
         etNewPassword = view.findViewById(R.id.et_new_password);
         etConfirmPassword = view.findViewById(R.id.et_confirm_password);
-        btnResetPassword = view.findViewById(R.id.btn_reset_password);
+        Button btnResetPassword = view.findViewById(R.id.btn_reset_password);
 
 
         if (getArguments() != null) {
